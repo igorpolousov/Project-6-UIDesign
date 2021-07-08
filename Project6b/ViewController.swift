@@ -52,18 +52,41 @@ class ViewController: UIViewController {
         view.addSubview(label3)
         view.addSubview(label4)
         view.addSubview(label5)
-        // Создали словарь чтобы упростить работу в дальнейшем
-        let viewsDictionary = ["label1": label1,"label2": label2,"label3": label3,"label4": label4,"label5": label5]
-        // Ограничения по горизонтали для каждой view
-        for label in viewsDictionary.keys {
-            view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[\(label)]|", options: [], metrics: nil, views: viewsDictionary))
+        
+        
+//
+//        // Создали словарь чтобы упростить работу в дальнейшем
+//        let viewsDictionary = ["label1": label1,"label2": label2,"label3": label3,"label4": label4,"label5": label5]
+//        // Ограничения по горизонтали для каждой view
+//        for label in viewsDictionary.keys {
+//            view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[\(label)]|", options: [], metrics: nil, views: viewsDictionary))
+//        }
+//        // Словарь для работ с горизонтальными constraints
+//        let metrics = ["lableHight": 88]
+//        // Ограничения по вертикали для каждой view. Размер и приоритет @999 установлено для первой view остальные сделаны по образцу первой
+//        view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[label1(lableHight@999)]-[label2(label1)]-[label3(label1)]-[label4(label1)]-[label5(label1)]-(>=10)-|", options: [], metrics: metrics, views: viewsDictionary))
+//
+        
+        // Setting constraints using anchors
+        
+        var previous: UILabel?
+        
+        for label in [label1, label2, label3, label4, label5] {
+            
+            label.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
+            label.heightAnchor.constraint(equalToConstant: 88).isActive = true
+            
+            if let previous = previous {
+                label.topAnchor.constraint(equalTo: previous.bottomAnchor, constant: 10).isActive = true
+            } else {
+                label.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 0).isActive = true
+            }
+            previous = label
+            
         }
-        // Словарь для работ с горизонтальными constraints
-        let metrics = ["lableHight": 88]
-        // Ограничения по вертикали для каждой view. Размер и приоритет @999 установлено для первой view остальные сделаны по образцу первой
-        view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[label1(lableHight@999)]-[label2(label1)]-[label3(label1)]-[label4(label1)]-[label5(label1)]-(>=10)-|", options: [], metrics: metrics, views: viewsDictionary))
         
     }
+    
 
 
 }
