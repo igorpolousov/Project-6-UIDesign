@@ -54,7 +54,7 @@ class ViewController: UIViewController {
         view.addSubview(label5)
         
         
-//
+//        // Setting constraints with VFL visusal format layout
 //        // Создали словарь чтобы упростить работу в дальнейшем
 //        let viewsDictionary = ["label1": label1,"label2": label2,"label3": label3,"label4": label4,"label5": label5]
 //        // Ограничения по горизонтали для каждой view
